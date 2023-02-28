@@ -1,0 +1,414 @@
+---
+title: "Seminar Paper in Natural Resource Use and Conservation Economics: Preferences on Biodiversity Conservation"
+author: "Tilman von Samson-Himmelstjerna (216232989 - MLU Halle-Wittenberg)"
+date: "2023-02-06"
+output:
+  pdf_document: default
+  word_document: default
+reference-section-title: null
+bibliography: lib.bib
+linestrech: 1.5
+editor_options:
+  markdown:
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, include=FALSE)
+
+```
+
+```{r, include=FALSE, echo=FALSE, eval=TRUE}
+source("startup.R")
+source("dataadjust.R")
+source("models.R")
+source("mwtp.R")
+```
+
+## 1. Introduction
+
+Biodiversity conservation is one of the most urging responsibilities for
+modern societies to ensure a living within the planetary boundaries
+(@steffen2015planetary). A sharp decline in the planet's biodiversity
+has irreversible consequences not only for the stability of ecosystems,
+but also for the stability of global economies. Recently, the corona
+pandemic has highlighted the vulnerability of these systems and the
+interconnections between human activities and the natural environment
+(@lawler2021covid). A key challenge for biodiversity conservation
+policies is the right incorporation of it's direct and indirect
+values(@diaz2015ipbes). Decision-making must therefore be based on sound
+economic valuation that captures the diversity of values and utilities
+that people derive from the ecosystem and its biodiversity in
+particular, which in most cases are not included in market prices.
+
+To tackle this issue, a growing body of literature investigates on
+stated preferences for biodiversity over the whole range of low-,
+middle- and high-income countries (@bhat2021willingness,
+@bienabe2006public, @le2016public). A cornerstone of this research is
+the estimation of the respondents Willingness to Pay (WTP) for
+biodiversity conservation. @bhat2021willingness, for instance, find a
+high willingness to pay of around 3.32\$ per year in the form of
+increasing water rates for biodiversity conservation in Dachigam
+National Park, India. Findings like these can have far reaching
+practical implications for local authorities and the design of
+preference-based policy measures.
+
+This choice experiment grounds on data that was collected between March
+and April 2013 in Germany and aims at providing insights on preferences
+regarding biodiversity conservation in a high-income country. Besides
+the estimation of the respondents preferences on forest biodiversity and
+4 other environmental attributes and the corresponding WTP, this study
+aims at investigating on socio-demographic and behavioral factors that
+might influence preferences with regard to biodiversity and thereby
+could add further perspectives to the existing body of literature. On
+the one hand it asks whether income might explain some of the effects of
+preferences for biodiversity. The generic hypothesis would be, that
+higher levels of income could leverage an individuals preferences for
+natural goods as basic needs become less important. On the other hand
+the study focuses on the effects of experiencing natural services by
+spending days outside in the open landscape. For the latter the
+hypothesis would follow the line that experiencing environmental
+attributes might yield direct utility and an increase in the level of
+biodiversity attributes might increase utility.
+
+I find significant and positive estimates for preferences on the share
+of forest, the share of unused forest and forest biodiversity, while the
+estimate for the share of foreign trees is significant and negative. A
+central finding is the negative impact of higher levels of income on
+preferences on forest biodiversity.
+
+Section 2. introduces the Econometric approach and provides some general
+information on the data. While section 3 provides the results of the
+model estimations and some interpretation, section 4 discusses these and
+concludes.
+
+## 2. Method
+
+In order to estimate the respondents preferences over certain
+environmental attributes I set up a discrete choice experiment that
+builds up on discrete choice research and data on local land use changes
+in Germany and especially on the work of @sagebiel2017 (referred to as
+"the original paper"). Therefore, 1233 randomly German adults were
+interviewed by a market research company between March and April 2013.
+The respondents were given a set of choices that were framed as an
+survey in order to learn more about people's views with regard to the
+landscape, that was expressed in terms of six attributes. These included
+*share of forest in the landscape*, *size of individual fields and
+forest areas*, *share of foreign trees*, *share of unused forest*,
+*biodiversity within the forest* and *price of improvement* on certain
+attributes. Within each choice situation the respondents could choose
+between three alternatives that reflected either improvement,
+deterioration or persistence of the condition of the landscape with
+regard to the specific attributes. The first level for the *share of
+forest in the landscape* was a 10% decrease, the second the maintenance
+of the status quo and the third an 10% increase in the share, which
+correspondingly would lead to a proportional shift in the share of
+agricultural land. Attribute levels for *biodiversity within the forest*
+ranged between "as today", "slightly raised" and "distinctly raised".
+The other attribute-levels followed similar patterns. The *price*
+attribute was framed as a yearly payment to a local fund in order to
+that ranged between 10€ and 160€.
+
+Two important notes on the structure of the choices should be noted.
+First, the data set needs to be adjusted for the individual status quo
+levels, which was done in the original paper by including additional
+data for the "share of forest" for instance. However, individual data on
+the level of biodiversity was not available, which is important for my
+analysis and must be considered by evaluating the results. Second, the
+structure of the survey reflects mostly a discrete choice situation in
+which the variables are ordinal, but not continuous and thus discrete.
+In the original survey the levels of some of the attributes were not
+ordered linearly. Therefore, I re-ordered them to estimate them in line
+with the utility function specification, which is derived in the
+following.
+
+### Random utility model
+
+The key underlying assumption of the choice experiment is that by
+deciding for one of the alternatives, the respondents reveal their
+preferences of the attributes which then can be expressed in a indirect
+utility function and ultimately be estimated within a conditional logit
+model. Utility theory would imply that utility maximizing agents would
+choose the alternative that yields the highest utility
+(@louviere2000stated). The exact description of people's preferences
+within a linear utility function is an unrealistic assumption when it
+comes to estimating real world preferences, as almost certainly
+randomness is involved in the decision context. Therefore, I include the
+random parameter Epsilon to the econometric model. The deterministic
+part from the choice observations is expressed in terms of an indirect
+utility function. The decision towards the higher valued alternative
+reflects the solution of the individuals maximization problem and can be
+captured within the indirect utility function. However, uncertainty
+demands that conclusions must be drawn in terms of probabilities, due to
+the unobserved part Epsilon. Therefore the choice results can be
+understood such that the probability of choosing one alternative over
+the other is the probability that the utility of one alternative is
+bigger than the other. The response probabilities then can be derived by
+using a conditional logit model, which follows a cumulative distribution
+function and is based on the random utility model which is derived in
+the next part. In order to estimate the model I used Maximum Likelihood
+Estimation.
+
+### Model specification
+
+With respect to the land use choice experiment I specified three
+different models. Each model is based on a different utility function
+that is expressed in terms of the six attributes that are modeled
+differently each time.
+
+In order to compare the different models I set up a baseline model with
+a linear utility function:
+
+$$U=\beta_0*ASC +\beta_1*ShFor+\beta_2*FiSizHalf+\beta_3*FiSizDouble+\beta_4*FoTre+$$
+$$\beta_5*NoUse+\beta_6*FoBio +\beta_7*Pri+\epsilon$$
+
+The attribute for the size of individual fields is coded across all
+models as two dummy variables for each alternative. The second model is
+very similar to the baseline model in the original paper by
+@sagebiel2017. It contains squared terms for *ShFor*, as it is assumed
+that the marginal utility of forest shares is diminishing. However, it
+excludes the interaction term between the price attribute and the
+disposable income:
+
+$$U=\beta_0*ASC+\beta_1*ShFor+\beta_2*ShFor^2+\beta_2*FiSizHalf+\beta_3*FiSizDouble+$$
+$$\beta_4*FoTre+\beta_5*NoUse+\beta_6*FoBio+\beta_7*Pri+\epsilon$$
+
+The third model includes two interaction terms that aimed at the
+initially postulated research question. The first is between the
+biodiversity attribute and a mean-centered variable for disposable
+income, the second is build between the biodiversity attribute and a
+mean-centered variable for days in the open landscape:
+
+$$U=\beta_0*ASC+\beta_1*ShFor+\beta_2*ShFor^2+\beta_3*FiSizHalf+\beta_4*FiSizDouble+\beta_5*FoTre+$$
+$$\beta_6*NoUse+\beta_7*FoBio+\beta_8*Pri+\beta_9*{FoBio*MCInc}+\beta_10*{FoBio*MCNatDay}+\epsilon$$
+
+The first interaction aims at capturing possible heterogeneity in
+preferences that is explained by income. The hypothesis follows the
+line, that higher income levels might increase the degree of
+environmental preferences, as other needs, like basic needs, might
+become relatively less important. However, as the data only captures
+income on the county level, this can only be seen as a broad
+approximation. As described above, the hypothesis for the latter
+interaction states that utility for people that are spending more days
+in the open landscape would increase by increasing levels of forest
+biodiversity.
+
+### Marginal Willingness to Pay (MWTP)
+
+In the next step I calculated the marginal willingness to pay (MWTP)
+with respect to the biodiversity attribute. The MWTP relates the
+marginal utility of the attribute with the marginal utility of the cost
+attribute and thus should reflect the monetary amount an individual
+would pay for a marginal change in the level of the respective
+attribute. The general formula for the MWTP is given by:
+
+$$MWTP=-\frac{\frac{\partial V}{\partial atr}}{\frac{\partial V}{\partial a_c}}$$
+
+This approach can be very practical in order to asses values for certain
+goods or attributes that do not have a directly accessible market value
+like the degree of biodiversity in the forest. In order to account for
+the average willingness to pay one needs to account for a mean-centered
+variant of the demographic variable that is used in the interaction
+term. The average MWTP for the degree of biodiversity is calculated as:
+
+$$MWTP_{biodiv}=-\dfrac{\beta_6+\beta_8*MCInc+\beta_9*MCNatDay}{\beta_7}$$
+
+## 3. Results
+
+The results are estimated with the Maximum Likelihood estimation by
+using the "R" software package "Apollo" and are shown in Table 1. Unless
+otherwise highlighted, the results for model three are discussed in the
+following. The coefficients for the alternative specific constants (ASC)
+are negative and do significantly vary from zero at the 0.1% level. As
+the ASC's are coded as dummy variables they capture effects to not
+choose the status quo option, that are not displayed by the attributes.
+In both cases the estimates indicate decreases in utility.
+
+The positive and significant coefficient at the 0.1% level for the
+linear term of *ShFor* is large in magnitude across all model
+specifications. It indicates that people gain utility in marginal
+increases of forest shares. It can be assumed that with higher levels of
+forest shares people gain less from an additional unit of forest. By
+including a squared term for forest share, the model should account for
+the possibility of diminishing marginal utility with respect to this
+attribute. As the coefficient "b_ShFor2" is negative and the null
+hypothesis can be refused at the 0.1% level, this assumption seems to be
+justified and the hypothesis of an inversely U-shaped can be verified.
+
+A less and a more fragmented landscape might not to be preferred by the
+participants of the choice experiment. Both estimated dummy parameters
+for the attribute *FiSiz* are negative. However, the coefficients are
+not significant across all model specifications. This might imply that
+the respondents prefer the status quo level over doubling and halving
+the field and forest area sizes, but reasonable interpretation is not
+feasible.
+
+The parameter for *share of unused forest* is statistically significant
+at the 0.1% level, large in magnitude and positive across all model
+specifications. This implies that individuals gain utility with marginal
+increases in unused forest shares. This insight might reflect the
+intensive public discussion about the German "Waldsterben" and calls for
+a more extensive forest management in the 1980s (@metzger2015erst). The
+opposite effect can be observed with respect to the parameter *FoTre*
+that captures increases in the amount of foreign trees, which is
+negative and statistically significant at the 1% level.
+
+The coefficient for *FoBio* is positive and significant, which implies
+that on average the utility of biodiversity increases with higher levels
+of biodiversity. Furthermore, the coefficient for the interaction term
+between the biodiversity attribute and the mean centered average income
+is significant at the 1% level and negative. In fact, this refuses the
+initial hypothesis that higher levels of income lead to higher
+preferences for biodiversity. The interaction between *days in the open
+landscape* and biodiversity in the forest is neither large in magnitude,
+nor statistically significant, which makes reasonable interpretation of
+the result impossible despite the insight that within this discrete
+choice setting an impact of experiencing "open landscape" directly has
+no impact on preferences about biodiversity levels within the forest.
+
+*Price* has a negative coefficient that is significant at the 0.1%
+level. This indicates a decrease in utility with increasing costs for
+improvement measures on the respective environment.
+
+With a look at the two interaction terms it is remarkable that their
+impact on the model outcomes is relatively small. By comparing the
+results to the second model, which is termed as the "No Interaction"
+model Table 2, one can see that further controls on socio-demographic
+and behavioral variables do not change the model results significantly.
+However, the coefficient for the income related interaction is
+considerable in terms of magnitude, this effect would have been
+unobserved by neglecting this variable. The addition of the second
+interaction term does not add any explanatory power to the model and
+could be dropped. However, in terms of the initially stated hypothesis
+the result remains of interest. 
+The main difference between the baseline
+model and the subsequent models is the inclusion of the quadratic term for *ShFor*,
+which has an considerable impact on the magnitude of the models
+estimates. By comparing the baseline with the "No Interaction" model one
+can see large differences for the the *ShFor* estimates, as its value drops from 0.43 to 0.07. The
+decrease in the *ShFor* estimate and a reduction in the standard
+errors shows that this utility function specification can capture the
+dynamics and explain the data better than the linear specification. All 
+estimates remain relatively similar when comparing the "No Interaction"
+model and the "Full Model". A quick look at the Log-Likelihood values
+indicates a better goodness-of-fit of the third model specification,
+which can simply be explained by the higher number of predictor
+variables. A more insightful indicator is the Likelihood ratio test, for
+which the null hypothesis states that the nested model fits the data
+equally well as the full model. The resulting Chi-squared test-statistic
+is around 25.31 with a corresponding p-value at 3.193e-06, whereby the
+null hypothesis that both models fit the data equally well can be
+rejected at the 0.1% level. Therefore, including the interaction terms
+adds more explanatory power to the model.
+
+```{r, echo=FALSE, results=FALSE, message=FALSE, warning=FALSE}
+# lrtest(model3, model2)
+# summary(lrtest)
+```
+
+```{r, echo=FALSE, include=FALSE, message=FALSE, warning=FALSE}
+ 
+models_tex=list()
+
+models_tex[["model1"]] <- quicktexregapollo(model1)
+models_tex[["model2"]] <- quicktexregapollo(model2)
+models_tex[["model3"]] <- quicktexregapollo(model3)
+# screenreg(models_tex, digits=4)
+```
+
+```{r, echo=FALSE, results="asis", include=TRUE}
+texreg(models_tex ,custom.model.names = c("Base Model", "No Interaction" , "Full Model"), custom.title="Table 1", caption = "Model Specifications")
+```
+
+### MWTP
+
+A good way to find a practical interpretation of the results of a
+discrete choice experiment is the calculation of the MWTP, which was
+exemplary derived for *biodiversity in the forest* in the previous
+section. Table 2 shows the MWTP for each attribute. Most of the MWTP
+estimations for the attributes are significant at the 0.1% level. On
+average the willingness to pay of the respondents for an marginal
+increase of *FoBio* is 33.92€. The interpretation of the value is more
+relevant in terms of the general direction of the value, then in precise
+monetary units or units of biodiversity. As the scale of biodiversity
+levels ranged from "as today" over "slightly increased" to "distinctly
+increased" it is impossible to pin down a precise unit of biodiversity
+that the MWTP would cover. It rather reflects the willingness to pay for
+a subjectively perceived slight or distinct increase. Furthermore, the
+data set was not adjusted for the individual specific status quo as data
+for this attribute was unavailable. Therefore, only a general ordering
+of preferences with regard to this attribute is covered by the data and
+reflected in the MWTP value.
+
+The MWTP for *ShFor* is positive but declining with further shares of
+forest. This can be seen due to the positive value around 8.86€ that the
+respondents would pay on average for an additional 1% share of forest
+and the negative value around -0.06€ for the quadratic term that
+indicates diminishing marginal utilities. Both terms are significant at
+the 0.1% level.
+
+```{r, echo=FALSE, results="asis", include=TRUE}
+
+modeltex <- quicktexregapollo(model3,wtpest = allwtp)
+# screenreg(modeltex, digits=4)
+texreg(modeltex, digits=4, custom.model.names = "Full Model",  custom.title="Table 2",  caption = "Marginal Willingness to Pay")
+
+```
+
+## 4. Discussion and conclusion
+
+In the context of the United Nations decade on biodiversity in the years
+of 2011-2020 this study offers some insights on possible behavioral and
+socio-demographic determinants of individual preferences for
+biodiversity. Especially in the face of the ongoing increase of
+anthropocentric driven biodiversity loss it is essential to determine
+its drivers and possible angles for policy measures
+{@jaureguiberry2022direct}. Whether or not contributions towards
+ecosystem services lead to gains in individuals utility, has profound
+policy implications.
+
+In general, the Maximum Likelihood estimates of the conditional logit
+model that is applied to the discrete choice experimental data in this
+study are largely significant at the 0.01% level. With regard to forest
+biodiversity the estimates indicate strong utility gains towards higher
+degrees of biodiversity. In order to get more insights of these effects
+I controlled for average regional income as a proxy for personal income
+and for a variable that captures days spend in the open landscape. The
+results show that higher levels of income lead to negative changes in
+marginal utility of biodiversity. Therefore, the initial hypothesis that
+income has positive impacts on biodiversity preferences needs to be
+rejected. This finding is at odds with research done by
+@bienabe2006public in a middle-income country, where the choice
+experiment revealed that higher income groups have a higher WTP for
+Payments for Ecosystem Services that enhance biodiversity conservation.
+However, overall MWTP for increases in biodiversity levels is positive
+and indicate on average a WTP around 34€ annually for slight increases
+in forest biodiversity. This finding has important policy implications,
+as taxes aiming on forest biodiversity protection could thereby be
+justified. For example, a unit tax on the volume of timber harvested
+would be conceivable (@michanek2018landscape). However, further research
+would be necessary to verify the findings here with personal income data
+and more precise choice-levels in order to find solid estimates for the
+magnitude of possible policy interventions.
+
+Experiencing days in the open landscape had no significant effect on the
+respondents preferences on forest biodiversity. The empirical finding,
+that direct experience and thus "usage" of biodiversity has no
+significant impact on biodiversity preferences could theoretically
+indicate the role of non-use "existence values". Nevertheless, a
+reasonable determination of this relationship cannot be provided here
+and could be an interesting trace for further research.
+
+A possible limitation to these findings is the weak representatives of
+the sample. @sagebiel2017 report that the respondents are on average
+younger, less female, more educated and live in smaller households than
+the German average. Another limitation is the lack of data on the
+individual status quo of levels of forest biodiversity and personal
+income data, which prevents the determination of exact estimates.
+Furthermore, the estimation of the conditional logit model prevents from
+controlling for preference heterogeneity, whereby, a mixed logit
+approach could solve this issue. The large sample size of the survey and
+the high significance of the results, nonetheless, can provide strong
+inferences about the research question as initially formulated.
+
+## Bibliography
